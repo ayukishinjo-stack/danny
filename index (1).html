@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A letter for you</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     EVERYTHING YOU NEED TO EDIT IS IN THE <script id="config"> BLOCK
+     AT THE BOTTOM OF THIS FILE. Scroll down. You don't have to touch
+     anything else.
+     ══════════════════════════════════════════════════════════════════ -->
+
+<main id="app">
+
+  <!-- ─── Scene 1: the mailbox ─────────────────────────────────── -->
+  <section class="scene scene--mailbox" id="scene-mailbox">
+    <div class="mailbox-stage">
+      <button class="mailbox" id="mailbox-btn" aria-label="Open the mailbox">
+        <svg class="mailbox-svg" viewBox="0 0 280 360" role="img" aria-hidden="true">
+          <defs>
+            <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%"  stop-color="#9C0E24"/>
+              <stop offset="38%" stop-color="#D01732"/>
+              <stop offset="72%" stop-color="#B5112A"/>
+              <stop offset="100%" stop-color="#7C0A1C"/>
+            </linearGradient>
+            <linearGradient id="postGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%"  stop-color="#7C0A1C"/>
+              <stop offset="45%" stop-color="#B5112A"/>
+              <stop offset="100%" stop-color="#6E0917"/>
+            </linearGradient>
+            <linearGradient id="doorGrad" x1="0" y1="0" x2="1" y2="0.4">
+              <stop offset="0%"  stop-color="#C41430"/>
+              <stop offset="100%" stop-color="#8E0B20"/>
+            </linearGradient>
+            <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0%"  stop-color="#C9974A" stop-opacity="0.30"/>
+              <stop offset="100%" stop-color="#C9974A" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <ellipse cx="140" cy="342" rx="86" ry="13" fill="#140C18" opacity="0.55"/>
+          <circle cx="140" cy="150" r="140" fill="url(#glow)"/>
+
+          <!-- post -->
+          <rect x="120" y="250" width="40" height="86" rx="6" fill="url(#postGrad)"/>
+          <rect x="102" y="326" width="76" height="16" rx="7" fill="#6E0917"/>
+
+          <!-- body -->
+          <path d="M52 108a88 88 0 0 1 176 0v132a16 16 0 0 1-16 16H68a16 16 0 0 1-16-16Z" fill="url(#bodyGrad)"/>
+          <path d="M52 108a88 88 0 0 1 176 0v10H52Z" fill="#E03A52" opacity="0.35"/>
+          <rect x="44" y="238" width="192" height="22" rx="8" fill="#8E0B20"/>
+          <rect x="44" y="238" width="192" height="6" rx="3" fill="#C9974A" opacity="0.5"/>
+
+          <!-- letter slot -->
+          <rect x="92" y="88" width="96" height="14" rx="7" fill="#3A0710"/>
+          <rect x="92" y="88" width="96" height="5" rx="2.5" fill="#1E0308"/>
+
+          <!-- door -->
+          <g id="mailbox-door" class="mailbox-door">
+            <rect x="74" y="120" width="132" height="110" rx="10" fill="url(#doorGrad)"/>
+            <rect x="80" y="126" width="120" height="98" rx="7" fill="none" stroke="#C9974A" stroke-width="1.6" opacity="0.55"/>
+            <path class="mailbox-heart" d="M140 206c-24-16-38-28-38-44a19 19 0 0 1 38-9 19 19 0 0 1 38 9c0 16-14 28-38 44Z" fill="#F4E8DF"/>
+            <circle cx="196" cy="175" r="5" fill="#C9974A"/>
+          </g>
+
+          <!-- flag -->
+          <g class="mailbox-flag" id="mailbox-flag">
+            <rect x="232" y="140" width="9" height="86" rx="4" fill="#C9974A"/>
+            <path d="M241 142h34l-11 15 11 15h-34Z" fill="#F4E8DF"/>
+          </g>
+
+          <!-- the letter that flies out -->
+          <g class="mailbox-letter" id="mailbox-letter">
+            <rect x="103" y="66" width="74" height="50" rx="4" fill="#F7EFE7" stroke="#D9C7B6" stroke-width="1.5"/>
+            <path d="M103 70l37 27 37-27" fill="none" stroke="#C6102E" stroke-width="2.4" stroke-linecap="round"/>
+          </g>
+        </svg>
+
+        <span class="mailbox-cta" aria-hidden="true">
+          <svg class="mailbox-arrow" viewBox="0 0 60 44" aria-hidden="true">
+            <path d="M4 4c14 22 30 30 50 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M43 30l12 6-7 9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <em>click me</em>
+        </span>
+      </button>
+      <p class="mailbox-hint" id="mailbox-hint">You've got mail.</p>
+    </div>
+  </section>
+
+  <!-- ─── Scene 2: the book ────────────────────────────────────── -->
+  <section class="scene scene--book" id="scene-book" hidden>
+    <div class="book-wrap">
+      <div class="book" id="book">
+        <div class="page page--left"  id="page-left"></div>
+        <div class="spine" aria-hidden="true"></div>
+        <div class="page page--right" id="page-right"></div>
+        <div class="leaf" id="leaf" aria-hidden="true">
+          <div class="leaf__face leaf__face--front" id="leaf-front"></div>
+          <div class="leaf__face leaf__face--back"  id="leaf-back"></div>
+        </div>
+      </div>
+
+      <nav class="controls" aria-label="Pages">
+        <button class="ctrl" id="prev-btn" aria-label="Previous page">&#8592; back</button>
+        <p class="counter" id="counter" aria-live="polite"></p>
+        <button class="ctrl" id="next-btn" aria-label="Next page">next &#8594;</button>
+      </nav>
+      <p class="keyhint">Use the arrow keys, or tap the page edges.</p>
+    </div>
+  </section>
+
+</main>
+
+<style>
+/* ═══════════════════ tokens ═══════════════════ */
+:root{
+  --ink:#241B2B;
+  --ink-soft:#5A4A5E;
+  --post:#C6102E;
+  --post-deep:#8E0B20;
+  --brass:#C9974A;
+  --paper:#F5EAE1;
+  --paper-2:#EEDFD3;
+  --paper-edge:#DCC6B4;
+  --dusk-1:#3A2438;
+  --dusk-2:#1A1020;
+
+  --leading:1.65;
+  --flip:820ms;
+  --ease:cubic-bezier(.62,.02,.28,1);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:"Bodoni Moda",Georgia,serif;
+  color:var(--ink);
+  background:
+    radial-gradient(120% 90% at 50% 8%, #4A2E46 0%, var(--dusk-1) 42%, var(--dusk-2) 100%);
+  min-height:100dvh;
+  overflow-x:hidden;
+}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+:focus-visible{outline:2.5px solid var(--brass);outline-offset:4px;border-radius:3px}
+
+.scene{
+  min-height:100dvh;
+  display:grid;
+  place-items:center;
+  padding:clamp(1rem,4vw,3rem);
+}
+[hidden]{display:none !important}
+
+/* ═══════════════════ mailbox ═══════════════════ */
+.mailbox-stage{text-align:center}
+
+.mailbox{
+  display:block;
+  position:relative;
+  padding:0;
+  transition:transform .5s var(--ease);
+}
+.mailbox:hover{transform:translateY(-6px)}
+.mailbox:active{transform:translateY(-2px) scale(.99)}
+
+.mailbox-svg{
+  width:min(60vw,300px);
+  height:auto;
+  display:block;
+  filter:drop-shadow(0 30px 44px rgba(0,0,0,.5));
+}
+
+.mailbox-door{
+  transform-origin:206px 175px;
+  transform-box:fill-box;
+  transform-origin:100% 50%;
+}
+.mailbox-heart{animation:beat 2.6s var(--ease) infinite}
+@keyframes beat{
+  0%,72%,100%{transform:scale(1)}
+  78%{transform:scale(1.11)}
+  85%{transform:scale(1.02)}
+  91%{transform:scale(1.07)}
+}
+.mailbox-heart{transform-box:fill-box;transform-origin:50% 50%}
+
+.mailbox-letter{opacity:0}
+.mailbox-flag{transform-box:fill-box;transform-origin:50% 100%}
+
+.mailbox-cta{
+  position:absolute;
+  left:calc(100% - 1.2rem);
+  top:52%;
+  display:flex;
+  align-items:center;
+  gap:.15rem;
+  color:var(--paper);
+}
+.mailbox-cta em{
+  font-family:"Caveat",cursive;
+  font-style:normal;
+  font-weight:700;
+  font-size:clamp(1.5rem,4.4vw,2.1rem);
+  line-height:1;
+  white-space:nowrap;
+  transform:rotate(-7deg);
+}
+.mailbox-arrow{width:clamp(34px,7vw,52px);height:auto;transform:scaleX(-1) rotate(8deg)}
+
+.mailbox-hint{
+  font-family:"Caveat",cursive;
+  font-size:clamp(1.25rem,3.4vw,1.6rem);
+  color:#C8B3C4;
+  margin:2.4rem 0 0;
+  letter-spacing:.02em;
+}
+
+/* opening sequence */
+.is-opening .mailbox-door{animation:doorSwing 900ms var(--ease) forwards}
+.is-opening .mailbox-letter{animation:letterOut 1000ms 320ms var(--ease) forwards}
+.is-opening .mailbox-flag{animation:flagUp 700ms 120ms var(--ease) forwards}
+.is-opening .mailbox-cta,
+.is-opening .mailbox-hint{animation:fadeOut 300ms forwards}
+.is-leaving{animation:sceneOut 620ms 780ms var(--ease) forwards}
+
+@keyframes doorSwing{to{transform:perspective(600px) rotateY(-108deg)}}
+@keyframes flagUp{to{transform:rotate(-64deg)}}
+@keyframes letterOut{
+  0%{opacity:0;transform:translateY(0) scale(.7)}
+  35%{opacity:1}
+  100%{opacity:1;transform:translateY(-130px) scale(1.9) rotate(-5deg)}
+}
+@keyframes fadeOut{to{opacity:0}}
+@keyframes sceneOut{to{opacity:0;transform:scale(1.35);filter:blur(6px)}}
+.scene--book.is-entering{animation:bookIn 700ms var(--ease) backwards}
+@keyframes bookIn{from{opacity:0;transform:scale(.9) translateY(24px)}}
+
+/* ═══════════════════ book ═══════════════════ */
+.book-wrap{width:100%;max-width:1040px}
+
+.book{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  perspective:2400px;
+  border-radius:6px;
+  background:var(--paper-edge);
+  box-shadow:
+    0 2px 0 var(--paper-2),
+    0 40px 70px -18px rgba(0,0,0,.62),
+    0 0 0 1px rgba(201,151,74,.25);
+  min-height:min(74vh,600px);
+}
+
+.page{
+  position:relative;
+  padding:clamp(1.4rem,3.2vw,2.6rem);
+  background:var(--paper);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  overflow:hidden;
+  backface-visibility:hidden;
+}
+.page--left{
+  border-radius:6px 0 0 6px;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.09), rgba(0,0,0,0) 9%),
+    var(--paper);
+}
+.page--right{
+  border-radius:0 6px 6px 0;
+  background:
+    linear-gradient(270deg, rgba(0,0,0,.07), rgba(0,0,0,0) 9%),
+    var(--paper);
+}
+.spine{
+  position:absolute;
+  left:50%;top:0;bottom:0;
+  width:26px;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,
+    rgba(0,0,0,0) 0%, rgba(90,58,40,.16) 34%,
+    rgba(90,58,40,.30) 50%, rgba(90,58,40,.16) 66%, rgba(0,0,0,0) 100%);
+  pointer-events:none;
+  z-index:3;
+}
+
+/* flipping leaf */
+.leaf{
+  position:absolute;
+  top:0;right:0;
+  width:50%;height:100%;
+  transform-style:preserve-3d;
+  transform-origin:left center;
+  z-index:5;
+  pointer-events:none;
+  display:none;
+}
+.leaf.is-flipping{display:block;animation:flipFwd var(--flip) var(--ease) forwards}
+.leaf.is-flipping-back{display:block;animation:flipBack var(--flip) var(--ease) forwards}
+@keyframes flipFwd{from{transform:rotateY(0)}to{transform:rotateY(-180deg)}}
+@keyframes flipBack{from{transform:rotateY(-180deg)}to{transform:rotateY(0)}}
+
+.leaf__face{
+  position:absolute;
+  inset:0;
+  backface-visibility:hidden;
+  overflow:hidden;
+}
+.leaf__face--front{
+  border-radius:0 6px 6px 0;
+  background:linear-gradient(270deg, rgba(0,0,0,.07), rgba(0,0,0,0) 9%),var(--paper);
+}
+.leaf__face--back{
+  transform:rotateY(180deg);
+  border-radius:6px 0 0 6px;
+  background:linear-gradient(90deg, rgba(0,0,0,.09), rgba(0,0,0,0) 9%),var(--paper);
+}
+.leaf__face > .page{
+  position:absolute;inset:0;
+  border-radius:inherit;
+  background:none;
+}
+
+/* ═══════════════════ page contents ═══════════════════ */
+.photo{
+  position:relative;
+  align-self:center;
+  width:100%;
+  max-width:340px;
+  background:#FFFDFA;
+  padding:14px 14px 58px;
+  border-radius:2px;
+  box-shadow:0 14px 26px -10px rgba(58,30,24,.45), 0 0 0 1px rgba(90,58,40,.12);
+  transform:rotate(var(--tilt,-2deg));
+}
+.photo img{
+  display:block;
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  background:var(--paper-2);
+  border-radius:1px;
+}
+.photo figcaption{
+  position:absolute;
+  left:16px;right:16px;bottom:14px;
+  font-family:"Caveat",cursive;
+  font-size:1.34rem;
+  line-height:1.15;
+  color:#4A3348;
+  text-align:center;
+}
+.photo--missing img{display:none}
+.photo--missing .ghost{
+  display:grid;
+  place-items:center;
+  aspect-ratio:4/5;
+  border:2px dashed var(--paper-edge);
+  border-radius:2px;
+  padding:1rem;
+  text-align:center;
+  font-family:"Caveat",cursive;
+  font-size:1.2rem;
+  line-height:1.3;
+  color:#9A8274;
+}
+.ghost{display:none}
+.photo--missing .ghost{display:grid}
+
+.photo-stack{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+}
+.photo-stack--2 .photo{max-width:none;width:58%;padding:10px 10px 44px}
+.photo-stack--2 .photo:first-child{z-index:1}
+.photo-stack--2 .photo:last-child{margin-left:-16%;z-index:2}
+.photo-stack--2 .photo figcaption{font-size:1.1rem;left:10px;right:10px;bottom:11px}
+.photo-stack--2 .corner{width:20px;height:20px}
+.photo-stack--2 .corner--bl,.photo-stack--2 .corner--br{bottom:38px}
+.photo-stack--2 .ghost{font-size:.98rem;padding:.6rem}
+
+.corner{position:absolute;width:26px;height:26px;pointer-events:none}
+.corner svg{width:100%;height:100%;display:block}
+.corner--tl{top:6px;left:6px}
+.corner--tr{top:6px;right:6px;transform:scaleX(-1)}
+.corner--bl{bottom:50px;left:6px;transform:scaleY(-1)}
+.corner--br{bottom:50px;right:6px;transform:scale(-1)}
+
+.chapter-no{
+  font-family:"Caveat",cursive;
+  font-size:1.4rem;
+  color:var(--post);
+  margin:0 0 .35rem;
+}
+.chapter-title{
+  font-size:clamp(1.55rem,3.4vw,2.35rem);
+  font-weight:700;
+  line-height:1.12;
+  margin:0 0 .2rem;
+  letter-spacing:-.012em;
+}
+.chapter-when{
+  font-family:"Caveat",cursive;
+  font-size:1.2rem;
+  color:var(--ink-soft);
+  margin:0 0 1.1rem;
+}
+.rule{
+  width:56px;height:2px;border:0;margin:0 0 1.1rem;
+  background:var(--brass);
+}
+.chapter-body{
+  font-size:clamp(.96rem,1.5vw,1.04rem);
+  line-height:var(--leading);
+  max-width:34ch;
+  margin:0 0 1rem;
+  color:#382B3C;
+}
+.chapter-note{
+  font-family:"Caveat",cursive;
+  font-size:1.35rem;
+  line-height:1.3;
+  color:var(--post-deep);
+  max-width:26ch;
+  margin:0;
+  transform:rotate(-1.4deg);
+}
+
+/* title spread */
+.title-eyebrow{
+  font-family:"Caveat",cursive;
+  font-size:1.35rem;
+  color:var(--post);
+  margin:0 0 .5rem;
+}
+.title-main{
+  font-size:clamp(2.4rem,6.6vw,4rem);
+  font-weight:700;
+  font-style:italic;
+  line-height:.98;
+  letter-spacing:-.025em;
+  margin:0 0 .9rem;
+}
+.title-sub{
+  font-size:1.02rem;
+  line-height:var(--leading);
+  max-width:30ch;
+  margin:0 0 1.4rem;
+  color:#382B3C;
+}
+.title-sig{
+  font-family:"Caveat",cursive;
+  font-size:1.5rem;
+  color:var(--post-deep);
+  margin:0;
+}
+
+.stamp{
+  align-self:center;
+  position:relative;
+  width:min(74%,230px);
+  aspect-ratio:3/3.6;
+  background:var(--post);
+  padding:12px;
+  transform:rotate(-4deg);
+  box-shadow:0 12px 24px -10px rgba(58,30,24,.5);
+}
+.stamp::after{
+  content:"";
+  position:absolute;inset:12px;
+  border:1.6px dashed rgba(245,234,225,.6);
+}
+.stamp-inner{
+  height:100%;
+  display:grid;
+  place-items:center;
+  gap:.3rem;
+  background:var(--post-deep);
+  color:var(--paper);
+  text-align:center;
+  padding:1rem .8rem;
+}
+.stamp-initial{
+  font-size:clamp(3rem,9vw,4.6rem);
+  font-weight:700;
+  font-style:italic;
+  line-height:1;
+  margin:0;
+}
+.stamp-word{
+  font-family:"Caveat",cursive;
+  font-size:1.2rem;
+  line-height:1.15;
+  margin:0;
+  opacity:.92;
+}
+.postmark{
+  position:absolute;
+  right:-14px;bottom:8%;
+  width:118px;height:118px;
+  color:#3E2A46;
+  opacity:.5;
+  transform:rotate(12deg);
+}
+
+/* finale */
+.finale{text-align:center;align-items:center}
+.finale .chapter-body,.finale .title-sub{margin-left:auto;margin-right:auto}
+.finale .rule{margin-left:auto;margin-right:auto}
+.wish{
+  font-family:"Caveat",cursive;
+  font-size:clamp(1.5rem,3.6vw,2rem);
+  line-height:1.35;
+  color:var(--post-deep);
+  max-width:24ch;
+  margin:0 auto;
+}
+.cake{width:clamp(56px,10vw,84px);height:auto;margin:0 auto 1rem;display:block;color:var(--post)}
+
+/* ═══════════════════ controls ═══════════════════ */
+.controls{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:clamp(1rem,4vw,2.4rem);
+  margin-top:1.6rem;
+}
+.ctrl{
+  font-family:"Caveat",cursive;
+  font-size:1.4rem;
+  color:var(--paper);
+  padding:.35rem .9rem;
+  border-radius:100px;
+  border:1.5px solid rgba(245,234,225,.32);
+  transition:background .25s,border-color .25s,opacity .25s;
+}
+.ctrl:hover:not(:disabled){background:rgba(245,234,225,.12);border-color:rgba(245,234,225,.6)}
+.ctrl:disabled{opacity:.28;cursor:default}
+.counter{
+  font-family:"Caveat",cursive;
+  font-size:1.2rem;
+  color:#C8B3C4;
+  margin:0;
+  min-width:6.5ch;
+  text-align:center;
+}
+.keyhint{
+  font-family:"Caveat",cursive;
+  text-align:center;
+  color:#8E7A8C;
+  font-size:1.05rem;
+  margin:.7rem 0 0;
+}
+
+/* ═══════════════════ responsive ═══════════════════ */
+@media (max-width:760px){
+  .book{
+    grid-template-columns:1fr;
+    grid-template-rows:auto auto;
+    min-height:0;
+  }
+  .spine{display:none}
+  .leaf{display:none !important}
+  .page{
+    border-radius:6px;
+    background:var(--paper);
+    padding:1.5rem 1.35rem;
+  }
+  .page--left{padding-bottom:.4rem}
+  .page--right{padding-top:.4rem}
+  .book.is-turning .page{animation:softTurn 460ms var(--ease)}
+  @keyframes softTurn{from{opacity:0;transform:translateX(14px)}}
+  .photo{max-width:270px}
+  .chapter-body,.title-sub{max-width:none}
+  .postmark{width:88px;height:88px;right:-6px}
+  .mailbox-cta{position:static;justify-content:center;margin-top:1.2rem}
+  .mailbox-arrow{transform:rotate(-96deg) scaleX(-1)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+}
+</style>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     ▼▼▼  EDIT EVERYTHING BELOW THIS LINE  ▼▼▼
+     ══════════════════════════════════════════════════════════════════ -->
+<script id="config">
+const CONFIG = {
+
+  /* Your best friend's name, and the first letter for the stamp. */
+  name: "Vian",
+  initial: "V",
+
+  /* Shown on the title page. */
+  intro: "Five years, a hundred inside jokes, and one very long group chat. I couldn't fit all of it in a card, so I built you a whole book instead. Take your time with it.",
+  signature: "— with all my love, Danny",
+
+  /* Each chapter = one page spread: photos on the left, the story on the right.
+
+     photos   : one or two filenames from your /photos folder.
+                One photo  -> a single big print.
+                Two photos -> an overlapping pair.
+     captions : the handwriting under each photo, in the same order
+     title    : the chapter heading
+     when     : the date or era
+     body     : the story, a sentence or three
+     note     : a short handwritten line under the story
+
+     All 19 of your photos are already slotted in below. Rearrange them however
+     you like — just keep each filename appearing exactly once. */
+  chapters: [
+    {
+      photos:["0bb9714b-2a3a-4290-8cdb-40281d4d142a.jpg"],
+      captions:["you always give me treats"],
+      title:"The day we go to church and eat",
+      when:"2026",
+      body:"The easiest days with you are the simple ones — church, food, and all the little moments that somehow become my favorite memories. You make even ordinary days feel lighter and warmer.",
+      note:"a little joke only she'll get"
+    },
+    {
+      photos:["306582189_5870085469682310_5114734842007071242_n.jpg","310324523_1785711388439077_8405302493688206879_n.jpg"],
+      captions:["before","after"],
+      title:"Becoming us",
+      when:"not long after",
+      body:"There was a point where it stopped being just hanging out and started becoming something I looked forward to. The more time we spent together, the more it felt like we were quietly turning into us.",
+      note:"still don't know how you put up with me"
+    },
+    {
+      photos:["310494177_1131080607784407_2513879661928087608_n.jpg"],
+      captions:["this one's my favourite"],
+      title:"The little things",
+      when:"when it got real",
+      body:"What I love most is how natural everything feels with you. The random conversations, the small kindnesses, the way you make a regular day feel special without even trying.",
+      note:"you are my favorite person to be around"
+    },
+    {
+      photos:["312315646_629336242111785_8129872564630809091_n.jpg","312499591_1815166272152508_7963358392553656476_n.jpg"],
+      captions:["laughs","all of them"],
+      title:"Good energy",
+      when:"all the good moments",
+      body:"With you, the mood always changes for the better. Even the small things turn into memories because you make them feel effortless, fun, and full of life.",
+      note:"you really do make everything brighter"
+    },
+    {
+      photos:["330542124_907290813797297_1177710537446416385_n.jpg"],
+      captions:["the way you smile"],
+      title:"The face I look for",
+      when:"in my favorite moments",
+      body:"Some people make a room feel lively. You make it feel safe, warm, and familiar in a way that is hard to explain. I always notice you first, and I always enjoy the feeling after.",
+      note:"you are my peace"
+    },
+    {
+      photos:["336242147_1931481180535479_5861707953321026410_n.jpg","336371774_601207461877061_4576947529585002999_n.jpg"],
+      captions:["real life","us being us"],
+      title:"The ordinary days",
+      when:"the best kind",
+      body:"The best memories are never the grand ones. They're the ordinary days where we just existed together, laughed a lot, and made each other feel seen without trying too hard.",
+      note:"this is my favorite kind of magic"
+    },
+    {
+      photos:["336513971_967916724198338_7181919058697438446_n.jpg"],
+      captions:["still making me smile"],
+      title:"Your presence",
+      when:"everywhere I look",
+      body:"There's something about you that makes everything feel more beautiful. Your energy, your laugh, your calm — it stays with me long after the moment is over.",
+      note:"you never fail to make me feel lucky"
+    },
+    {
+      photos:["336521316_575773317945718_4005556472937942596_n.jpg","336582654_573514768095128_8758061087845337616_n.jpg"],
+      captions:["tiny details","big feelings"],
+      title:"The details I keep",
+      when:"the moments that matter",
+      body:"I notice the little things with you. The way you talk, the way you make me feel, the way a normal day somehow turns into a memory that I never want to forget.",
+      note:"you are the kind of person I want to keep"
+    },
+    {
+      photos:["336617828_600220978360596_5655199232253035054_n.jpg","342920086_790931895723630_8706383854926022384_n.jpg"],
+      captions:["happy and glowing","still my favorite view"],
+      title:"You make everything softer",
+      when:"all the time",
+      body:"You bring so much warmth into the people around you. The way you smile, the way you stay kind, the way you make moments feel easier — it is one of the best things about you.",
+      note:"you deserve the world"
+    },
+    {
+      photos:["345874546_740556601099559_1300792690076642304_n.jpg"],
+      captions:["this one feels like home"],
+      title:"A safe place",
+      when:"the year it changed",
+      body:"Some people are just good company. You are different. Being around you feels easy, steady, and comforting in a way I don't take for granted.",
+      note:"thank you for being you"
+    },
+    {
+      photos:["346102631_1105060324216886_3279904948457718094_n.jpg","346110070_204801102364351_5718206966428970992_n.jpg"],
+      captions:["inside jokes","the best kind of memories"],
+      title:"The ones I keep replaying",
+      when:"when I think of you",
+      body:"The memories with you are the ones that stay with me the longest. The little laughs, the late talks, the comfortable silence — every one of them feels like a reminder of how lucky I am to have you in my life.",
+      note:"no picture needed for this one"
+    },
+    {
+      photos:["346110457_251278804105910_7731035852099342850_n.jpg","346110878_6088824377904626_7505907393760492800_n.jpg"],
+      captions:["us now","and onwards"],
+      title:"Where we are now",
+      when:"this year",
+      body:"This year, I just want to say thank you for being such a beautiful part of my life. You have made so many ordinary days feel special, and I am grateful for every chapter we've shared so far.",
+      note:"happy birthday, lovey, sister, best friend and everything"
+    }
+  ],
+
+  /* The last page. */
+  finale: {
+    title:"Happy birthday",
+    body:"Thank you for every version of yourself you've let me know, and for every ordinary day you made feel warm, beautiful, and full of life. Especially the day papa left us,thank you for being my crying shoulder, for letting me vent out all the words I never want to keep and all the words I secretly held. Thank you for always being there whenever I needed you",
+    wish:"Cheers to another year of you — more laughter, more memories, and more reasons to love the life we get to share."
+  }
+};
+</script>
+<!-- ══════════════════════════════════════════════════════════════════
+     ▲▲▲  STOP EDITING HERE  ▲▲▲
+     ══════════════════════════════════════════════════════════════════ -->
+
+
+<script>
+(function(){
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s == null ? "" : s)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+
+  document.title = "Happy birthday, " + CONFIG.name;
+
+  /* ── page builders ─────────────────────────────── */
+  const CORNERS = ["tl","tr","bl","br"].map(p =>
+    `<span class="corner corner--${p}"><svg viewBox="0 0 26 26"><path d="M0 26V0h26Z" fill="rgba(58,30,24,.20)"/><path d="M2 22V4h18Z" fill="rgba(255,253,250,.55)"/></svg></span>`
+  ).join("");
+
+  const POSTMARK = `<svg class="postmark" viewBox="0 0 120 120" aria-hidden="true">
+      <circle cx="60" cy="60" r="52" fill="none" stroke="currentColor" stroke-width="3"/>
+      <circle cx="60" cy="60" r="43" fill="none" stroke="currentColor" stroke-width="1.4"/>
+      <text x="60" y="52" text-anchor="middle" font-family="Bodoni Moda,serif" font-size="15" fill="currentColor">DELIVERED</text>
+      <text x="60" y="76" text-anchor="middle" font-family="Bodoni Moda,serif" font-size="13" fill="currentColor">WITH LOVE</text>
+      <path d="M12 60h96" stroke="currentColor" stroke-width="1.2"/>
+    </svg>`;
+
+  const CAKE = `<svg class="cake" viewBox="0 0 80 80" aria-hidden="true">
+      <path d="M40 8c3 5-1 7-1 10a4 4 0 0 0 8 0c0-3-4-7-7-10Z" fill="currentColor" opacity=".85"/>
+      <rect x="38" y="20" width="4" height="12" rx="2" fill="currentColor"/>
+      <path d="M14 38h52a8 8 0 0 1 8 8v4H6v-4a8 8 0 0 1 8-8Z" fill="currentColor" opacity=".55"/>
+      <path d="M6 52h68v14a6 6 0 0 1-6 6H12a6 6 0 0 1-6-6Z" fill="currentColor"/>
+    </svg>`;
+
+  function onePhoto(file, caption, tilt){
+    const src = "photos/" + (file || "");
+    return `<figure class="photo" style="--tilt:${esc(tilt)}">
+        ${CORNERS}
+        <img src="${esc(src)}" alt="${esc(caption || "A photo of us")}"
+             onerror="this.closest('.photo').classList.add('photo--missing')">
+        <div class="ghost">drop your photo in<br><strong>${esc(src)}</strong></div>
+        <figcaption>${esc(caption || "")}</figcaption>
+      </figure>`;
+  }
+
+  function photoBlock(ch){
+    const files    = ch.photos ? ch.photos.slice(0,2) : (ch.photo ? [ch.photo] : []);
+    const captions = ch.captions || (ch.caption ? [ch.caption] : []);
+    const tilts    = files.length > 1 ? ["-5deg","4deg"] : [ch.tilt || "-2.5deg"];
+    const html = files.map((f,i) => onePhoto(f, captions[i], tilts[i])).join("");
+    return `<div class="photo-stack photo-stack--${files.length}">${html}</div>`;
+  }
+
+  function buildSpreads(){
+    const s = [];
+
+    /* title spread */
+    s.push({
+      left: `<div class="stamp">
+               <div class="stamp-inner">
+                 <p class="stamp-initial">${esc(CONFIG.initial || CONFIG.name.charAt(0))}</p>
+                 <p class="stamp-word">one birthday,<br>hand delivered</p>
+               </div>
+             </div>${POSTMARK}`,
+      right:`<p class="title-eyebrow">a letter for</p>
+             <h1 class="title-main">${esc(CONFIG.name)}</h1>
+             <hr class="rule">
+             <p class="title-sub">${esc(CONFIG.intro)}</p>
+             <p class="title-sig">${esc(CONFIG.signature)}</p>`,
+      label:"the cover"
+    });
+
+    /* chapters */
+    (CONFIG.chapters || []).forEach((ch,i) => {
+      s.push({
+        left: photoBlock(ch),
+        right:`<p class="chapter-no">chapter ${i+1}</p>
+               <h2 class="chapter-title">${esc(ch.title)}</h2>
+               <p class="chapter-when">${esc(ch.when || "")}</p>
+               <hr class="rule">
+               <p class="chapter-body">${esc(ch.body || "")}</p>
+               <p class="chapter-note">${esc(ch.note || "")}</p>`,
+        label:"chapter " + (i+1)
+      });
+    });
+
+    /* finale */
+    const f = CONFIG.finale || {};
+    s.push({
+      left: `<div class="stamp" style="transform:rotate(3deg)">
+               <div class="stamp-inner">
+                 <p class="stamp-initial">${new Date().getFullYear()}</p>
+                 <p class="stamp-word">and every year<br>after this one</p>
+               </div>
+             </div>`,
+      right:`<div class="finale" style="display:flex;flex-direction:column;justify-content:center;height:100%">
+               ${CAKE}
+               <h2 class="title-main" style="font-size:clamp(2rem,5vw,3rem)">${esc(f.title || "Happy birthday")}</h2>
+               <hr class="rule">
+               <p class="chapter-body">${esc(f.body || "")}</p>
+               <p class="wish">${esc(f.wish || "")}</p>
+             </div>`,
+      label:"the end"
+    });
+
+    return s;
+  }
+
+  const SPREADS = buildSpreads();
+  let idx = 0, busy = false;
+
+  const pageLeft = $("page-left"), pageRight = $("page-right");
+  const leaf = $("leaf"), leafFront = $("leaf-front"), leafBack = $("leaf-back");
+  const prevBtn = $("prev-btn"), nextBtn = $("next-btn"), counter = $("counter");
+  const book = $("book");
+
+  const isNarrow = () => window.matchMedia("(max-width:760px)").matches;
+  const reduced  = () => window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+  function paint(i){
+    pageLeft.innerHTML  = SPREADS[i].left;
+    pageRight.innerHTML = SPREADS[i].right;
+  }
+
+  function syncControls(){
+    prevBtn.disabled = idx === 0;
+    nextBtn.disabled = idx === SPREADS.length - 1;
+    counter.textContent = SPREADS[idx].label;
+  }
+
+  function go(dir){
+    const target = idx + dir;
+    if(busy || target < 0 || target >= SPREADS.length) return;
+
+    if(isNarrow() || reduced()){
+      idx = target;
+      paint(idx);
+      syncControls();
+      book.classList.remove("is-turning");
+      void book.offsetWidth;
+      book.classList.add("is-turning");
+      return;
+    }
+
+    busy = true;
+    if(dir > 0){
+      leafFront.innerHTML = `<div class="page page--right">${SPREADS[idx].right}</div>`;
+      leafBack.innerHTML  = `<div class="page page--left">${SPREADS[target].left}</div>`;
+      pageRight.innerHTML = SPREADS[target].right;
+      leaf.className = "leaf is-flipping";
+    }else{
+      leafFront.innerHTML = `<div class="page page--right">${SPREADS[target].right}</div>`;
+      leafBack.innerHTML  = `<div class="page page--left">${SPREADS[idx].left}</div>`;
+      pageLeft.innerHTML  = SPREADS[target].left;
+      leaf.className = "leaf is-flipping-back";
+    }
+
+    setTimeout(() => {
+      idx = target;
+      paint(idx);
+      leaf.className = "leaf";
+      leafFront.innerHTML = leafBack.innerHTML = "";
+      busy = false;
+      syncControls();
+    }, 820);
+  }
+
+  nextBtn.addEventListener("click", () => go(1));
+  prevBtn.addEventListener("click", () => go(-1));
+
+  document.addEventListener("keydown", e => {
+    if($("scene-book").hidden) return;
+    if(e.key === "ArrowRight") go(1);
+    if(e.key === "ArrowLeft")  go(-1);
+  });
+
+  /* tap the outer edges of the book to turn */
+  book.addEventListener("click", e => {
+    const r = book.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    if(x > r.width * 0.82) go(1);
+    else if(x < r.width * 0.18) go(-1);
+  });
+
+  /* ── mailbox → book ─────────────────────────────── */
+  const sceneMailbox = $("scene-mailbox"), sceneBook = $("scene-book");
+  let opened = false;
+
+  $("mailbox-btn").addEventListener("click", function(){
+    if(opened) return;
+    opened = true;
+    this.disabled = true;
+
+    const wait = reduced() ? 0 : 1400;
+    sceneMailbox.classList.add("is-opening");
+    if(!reduced()) sceneMailbox.classList.add("is-leaving");
+
+    setTimeout(() => {
+      sceneMailbox.hidden = true;
+      sceneBook.hidden = false;
+      sceneBook.classList.add("is-entering");
+      paint(0);
+      syncControls();
+      nextBtn.focus({preventScroll:true});
+    }, wait);
+  });
+
+  window.addEventListener("resize", () => { if(!busy) paint(idx); });
+})();
+</script>
+</body>
+</html>
