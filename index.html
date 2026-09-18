@@ -770,7 +770,7 @@ const CONFIG = {
     </svg>`;
 
   function onePhoto(file, caption, tilt){
-    const src = "photos/" + (file || "");
+   const src = file || "";
     return `<figure class="photo" style="--tilt:${esc(tilt)}">
         ${CORNERS}
         <img src="${esc(src)}" alt="${esc(caption || "A photo of us")}"
